@@ -24,7 +24,7 @@ const setActiveTab = (tab) => {
   if (tab === 'login') {
     router.push('/login')
   } else {
-    router.push('/signup')
+    router.push('/')
     signupStep.value = 1 // Reset to first step when clicking signup tab
     selectedAccountType.value = '' // Reset account type
     showVerificationNotification.value = false // Reset verification notification
