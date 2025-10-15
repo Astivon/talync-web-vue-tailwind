@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 // Navigation items
 const navigationItems = ref([
@@ -7,24 +11,28 @@ const navigationItems = ref([
     id: 'dashboard',
     label: 'Dashboard',
     icon: 'dashboard_lined', // Using available icon
+    route: '/',
     active: true
   },
   {
     id: 'work',
     label: 'Work',
     icon: 'briefcase_lined', // Using available icon
+    route: '/work',
     active: false
   },
   {
     id: 'projects',
     label: 'Projects',
     icon: 'project_lined', // Using available icon
+    route: '/project',
     active: false
   },
   {
     id: 'messages',
     label: 'Messages',
     icon: 'message_lined', // Using available icon
+    route: '/messages',
     active: false,
     badge: 5
   },
@@ -32,6 +40,7 @@ const navigationItems = ref([
     id: 'community',
     label: 'Community',
     icon: 'community_lined', // Using available icon
+    route: '/community',
     active: false
   }
 ])
@@ -42,12 +51,14 @@ const bottomItems = ref([
     id: 'support',
     label: 'Support',
     icon: 'support', // Will use a fallback if not available
+    route: '/support',
     active: false
   },
   {
     id: 'settings',
     label: 'Settings',
     icon: 'settings', // Will use a fallback if not available
+    route: '/settings',
     active: false
   }
 ])
@@ -57,6 +68,10 @@ const handleNavClick = (itemId) => {
   // Update active state
   navigationItems.value.forEach(item => {
     item.active = item.id === itemId
+    if(itemId == item.id){
+      router.push(item.route)
+    }
+    
   })
   
   bottomItems.value.forEach(item => {

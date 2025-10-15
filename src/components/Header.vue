@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 // Reactive state
 const showProfileDropdown = ref(false)
@@ -24,15 +28,27 @@ const handleProfileAction = (action) => {
   showProfileDropdown.value = false
   // Add your profile action logic here
 }
+
+const currentPage = (routePath) => {
+  return route.path === routePath
+}
 </script>
 
 <template>
   <header class="flex items-center justify-between ">
     <!-- Left Section - Welcome Text -->
-    <div class="flex flex-col">
+    <div v-if="currentPage('/')" class="flex flex-col">
       <span class="text-xs font-medium">Welcome back</span>
       <span class="text-lg font-bold">Design Genius</span>
+      
     </div>
+    <div v-else class="hidden lg:flex items-center border rounded-[8px] border(--color-border)
+         px-[12px] w-72">
+         <img src="@/components/icons/search_lined.svg" alt="Search" class="size-[20px]">
+          <input v-model="searchQuery" @keyup.enter="" type="text" placeholder="Search"
+            class="bg-transparent! border-none! outline-none! flex-grow text-sm" />
+          
+        </div>
 
     <!-- Right Section - Icons and Profile -->
     <div class="flex items-center gap-2">
@@ -74,30 +90,30 @@ const handleProfileAction = (action) => {
         </div>
 
         <!-- Dropdown Menu (optional - you can remove if not needed) -->
-        <div 
+        <ul 
           v-if="showProfileDropdown"
           class="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50"
         >
-          <button 
+          <li 
             @click="handleProfileAction('profile')"
-            class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+            class="w-full text-left  px-4 py-2 hover:bg-gray-100 text-sm"
           >
             View Profile
-          </button>
-          <button 
+      </li>
+          <li 
             @click="handleProfileAction('settings')"
             class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
           >
             Settings
-          </button>
+    </li>
           <hr class="my-2 border-gray-200">
-          <button 
+          <li 
             @click="handleProfileAction('logout')"
             class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600"
           >
             Sign Out
-          </button>
-        </div>
+  </li>
+        </ul>
       </div>
     </div>
   </header>

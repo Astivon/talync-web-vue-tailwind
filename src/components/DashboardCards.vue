@@ -60,7 +60,7 @@ const handleWithdraw = () => {
 </script>
 
 <template>
-  <div class="overflow-y-auto">
+  <div class="overflow-y-auto no-scrollbar">
     <div class="flex gap-3 mt-3">
     <!-- Wallet Balance Card -->
     <div class="bg-white rounded-2xl p-6 border border-(--color-primary-highlight) shadow-xs flex-1">

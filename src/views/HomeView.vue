@@ -34,13 +34,7 @@ const handleWithdraw = () => {
 </script>
 
 <template>
-  <div class="flex h-full gap-6">
-    <Navbar />
-    <div class="flex-1 flex flex-col">
-      <Header />
-      <DashboardCards/>
-      </div>
-  </div>
+  <DashboardCards/>
 </template>
 
 <style scoped>

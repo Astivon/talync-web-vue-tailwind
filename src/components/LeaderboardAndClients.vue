@@ -93,26 +93,31 @@ const handleChat = (clientId) => {
 <template>
   <div class="flex gap-6 mt-6">
     <!-- Leaderboard Section -->
-    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex-1">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm flex-1">
       <div class="space-y-6">
         <!-- Header -->
-        <h3 class="text-xl font-bold text-black">Leaderboard</h3>
+        <h3 class="text-xl px-6 pt-6 font-bold text-black">Leaderboard</h3>
 
         <!-- Leaderboard List -->
-        <div class="space-y-4">
+        <div class="space-y-2">
           <div 
             v-for="user in leaderboard" 
             :key="user.id"
-            class="flex items-center justify-between py-3"
-            :class="{ 'bg-blue-50 px-4 rounded-xl': user.isCurrentUser }"
+            class="flex items-center justify-between py-3 px-8"
+            :class="{ 'bg-(--color-surface-background)': user.isCurrentUser }"
           >
             <!-- Left Side - Rank, Avatar, Name -->
-            <div class="flex items-center gap-4">
-              <!-- Rank Number -->
-              <span class="text-lg font-medium text-gray-400 w-6">{{ user.rank }}</span>
+            <div class="flex items-center gap-2">
+
+              <div class="relative">
+
+                <!-- Rank Number -->
+                <span class="absolute size-6 flex bg-(--color-surface-background) rounded-full justify-center items-center border border-(--color-primary-highlight)
+                -mt -ml font-medium text-[10px]">{{ user.rank }}</span>
+              
               
               <!-- Avatar -->
-              <div class="w-12 h-12 rounded-full overflow-hidden">
+              <div class="size-[52px] rounded-full overflow-hidden">
                 <img 
                   v-if="user.avatar"
                   :src="user.avatar" 
@@ -127,6 +132,8 @@ const handleChat = (clientId) => {
                   {{ user.rank }}
                 </div>
               </div>
+              </div>
+              
               
               <!-- Name and Jobs -->
               <div>
